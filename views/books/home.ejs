@@ -1,0 +1,396 @@
+<%- include ('../partials/_header.ejs')  %>
+<div class="main-visual">
+    <div class="main-visual__top">
+        <div class="main-visual__brand">
+            <h1 class="title">Bạn đang tìm sách gì?</h1>
+            <span class="description">Bạn không biết bản thân muốn đọc sách gì? Hãy khám phá ngay thư viện sách của chúng tôi.</span>
+            <button class="explorer-btn"><a class="no-style" href="single.html">Mua ngay</a></button>
+        </div>
+        <div class="main-visual__img">
+            <img src="images/banner.jpg"/>
+        </div>
+    </div>
+    <div class="main-visual__bottom">
+        <div class="book-row">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <div class="book-row">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <div class="book-row">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <div class="book-row">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <div class="book-row">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+    </div>
+</div>
+</header>
+<main>
+    <section class="section__top-trending">
+        <h2 class="section__title">
+            Sách bán chạy
+        </h2>
+        <%  if (books.length != 0) { %>
+            <div class="owl-carousel owl-theme slide">
+                <% books.forEach(book => { %>
+                    <div class="slide__item">
+                        <div class="book">
+                            <div class="book-title">
+                                <h3><%= book.title %></h3>
+                                <small><%= book.author %></small>
+                            </div>
+                            <div class="book-bg">
+                                <div class="book-img">
+                                    <img src="<%= book.image  %>"/>
+                                </div>
+                                <div class="favorite">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                            </div>
+                            <div class="book-price">
+                                <div class="book-price__item is-rating">
+                                    <i class="fas fa-star is-active"></i>
+                                    <i class="fas fa-star is-active"></i>
+                                    <i class="fas fa-star is-active"></i>
+                                    <i class="fas fa-star is-active"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>&nbsp;(65+)</span>
+                                </div>
+                                <div class="book-price__item is-description">
+                                    <span>"<%= book.description.substr(0, 50)%>.... "</span>
+                                </div>
+                                <div class="book-price__item is-price">
+                                    <span><%= book.price %> VNĐ</span>
+                                    <span><%= book.price %> VNĐ</span>
+                                </div>
+                                <div class="book-price__button">
+                                    <button><a class="no-style" href="/books/view/<%= book._id %>">Mua sách</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+            <div style="display: flex;">
+                <button class="section__view-all">
+                    Xem tất cả
+                </button>
+            </div>
+        <% } else { %>
+
+            <span style="text-align: center; display: block">Không có sản phẩm nào để hiển thị</span>
+
+        <% } %>
+    </section>
+    <hr style="margin-top: 50px">
+    <section class="section__top-trending">
+        <h2 class="section__title">
+            Sách đang giảm giá
+        </h2>
+        <div class="owl-carousel owl-theme slide">
+            <div class="slide__item">
+                <div class="book">
+                    <div class="book-title">
+                        <h3>How innovation work</h3>
+                        <small>KIETH BLANCHARD</small>
+                    </div>
+                    <div class="book-bg">
+                        <div class="book-img">
+                            <img src="images/book1.jpg"/>
+                        </div>
+                        <div class="favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="book-price">
+                        <div class="book-price__item is-rating">
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star"></i>
+                            <span>&nbsp;(65+)</span>
+                        </div>
+                        <div class="book-price__item is-description">
+                            <span>"It's all in your head is the true story of what makes up your mind."</span>
+                        </div>
+                        <div class="book-price__item is-price">
+                            <span>190.000 VNĐ</span>
+                            <span>290.000 VNĐ</span>
+                        </div>
+                        <div class="book-price__button">
+                            <button><a class="no-style" href="single.html">Mua sách</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide__item">
+                <div class="book">
+                    <div class="book-title">
+                        <h3>How innovation work</h3>
+                        <small>KIETH BLANCHARD</small>
+                    </div>
+                    <div class="book-bg">
+                        <div class="book-img">
+                            <img src="images/book1.jpg"/>
+                        </div>
+                        <div class="favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="book-price">
+                        <div class="book-price__item is-rating">
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star"></i>
+                            <span>&nbsp;(65+)</span>
+                        </div>
+                        <div class="book-price__item is-description">
+                            <span>"It's all in your head is the true story of what makes up your mind."</span>
+                        </div>
+                        <div class="book-price__item is-price">
+                            <span>190.000 VNĐ</span>
+                            <span>290.000 VNĐ</span>
+                        </div>
+                        <div class="book-price__button">
+                            <button><a class="no-style" href="single.html">Mua sách</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide__item">
+                <div class="book">
+                    <div class="book-title">
+                        <h3>How innovation work</h3>
+                        <small>KIETH BLANCHARD</small>
+                    </div>
+                    <div class="book-bg">
+                        <div class="book-img">
+                            <img src="images/book1.jpg"/>
+                        </div>
+                        <div class="favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="book-price">
+                        <div class="book-price__item is-rating">
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star"></i>
+                            <span>&nbsp;(65+)</span>
+                        </div>
+                        <div class="book-price__item is-description">
+                            <span>"It's all in your head is the true story of what makes up your mind."</span>
+                        </div>
+                        <div class="book-price__item is-price">
+                            <span>190.000 VNĐ</span>
+                            <span>290.000 VNĐ</span>
+                        </div>
+                        <div class="book-price__button">
+                            <button><a class="no-style" href="single.html">Mua sách</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide__item">
+                <div class="book">
+                    <div class="book-title">
+                        <h3>How innovation work</h3>
+                        <small>KIETH BLANCHARD</small>
+                    </div>
+                    <div class="book-bg">
+                        <div class="book-img">
+                            <img src="images/book1.jpg"/>
+                        </div>
+                        <div class="favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="book-price">
+                        <div class="book-price__item is-rating">
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star"></i>
+                            <span>&nbsp;(65+)</span>
+                        </div>
+                        <div class="book-price__item is-description">
+                            <span>"It's all in your head is the true story of what makes up your mind."</span>
+                        </div>
+                        <div class="book-price__item is-price">
+                            <span>190.000 VNĐ</span>
+                            <span>290.000 VNĐ</span>
+                        </div>
+                        <div class="book-price__button">
+                            <button><a class="no-style" href="single.html">Mua sách</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide__item">
+                <div class="book">
+                    <div class="book-title">
+                        <h3>How innovation work</h3>
+                        <small>KIETH BLANCHARD</small>
+                    </div>
+                    <div class="book-bg">
+                        <div class="book-img">
+                            <img src="images/book1.jpg"/>
+                        </div>
+                        <div class="favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="book-price">
+                        <div class="book-price__item is-rating">
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star"></i>
+                            <span>&nbsp;(65+)</span>
+                        </div>
+                        <div class="book-price__item is-description">
+                            <span>"It's all in your head is the true story of what makes up your mind."</span>
+                        </div>
+                        <div class="book-price__item is-price">
+                            <span>190.000 VNĐ</span>
+                            <span>290.000 VNĐ</span>
+                        </div>
+                        <div class="book-price__button">
+                            <button><a class="no-style" href="single.html">Mua sách</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide__item">
+                <div class="book">
+                    <div class="book-title">
+                        <h3>How innovation work</h3>
+                        <small>KIETH BLANCHARD</small>
+                    </div>
+                    <div class="book-bg">
+                        <div class="book-img">
+                            <img src="images/book1.jpg"/>
+                        </div>
+                        <div class="favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="book-price">
+                        <div class="book-price__item is-rating">
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star"></i>
+                            <span>&nbsp;(65+)</span>
+                        </div>
+                        <div class="book-price__item is-description">
+                            <span>"It's all in your head is the true story of what makes up your mind."</span>
+                        </div>
+                        <div class="book-price__item is-price">
+                            <span>190.000 VNĐ</span>
+                            <span>290.000 VNĐ</span>
+                        </div>
+                        <div class="book-price__button">
+                            <button><a class="no-style" href="single.html">Mua sách</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide__item">
+                <div class="book">
+                    <div class="book-title">
+                        <h3>How innovation work</h3>
+                        <small>KIETH BLANCHARD</small>
+                    </div>
+                    <div class="book-bg">
+                        <div class="book-img">
+                            <img src="images/book1.jpg"/>
+                        </div>
+                        <div class="favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="book-price">
+                        <div class="book-price__item is-rating">
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star"></i>
+                            <span>&nbsp;(65+)</span>
+                        </div>
+                        <div class="book-price__item is-description">
+                            <span>"It's all in your head is the true story of what makes up your mind."</span>
+                        </div>
+                        <div class="book-price__item is-price">
+                            <span>190.000 VNĐ</span>
+                            <span>290.000 VNĐ</span>
+                        </div>
+                        <div class="book-price__button">
+                            <button><a class="no-style" href="single.html">Mua sách</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide__item">
+                <div class="book">
+                    <div class="book-title">
+                        <h3>How innovation work</h3>
+                        <small>KIETH BLANCHARD</small>
+                    </div>
+                    <div class="book-bg">
+                        <div class="book-img">
+                            <img src="images/book1.jpg"/>
+                        </div>
+                        <div class="favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="book-price">
+                        <div class="book-price__item is-rating">
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star"></i>
+                            <span>&nbsp;(65+)</span>
+                        </div>
+                        <div class="book-price__item is-description">
+                            <span>"It's all in your head is the true story of what makes up your mind."</span>
+                        </div>
+                        <div class="book-price__item is-price">
+                            <span>190.000 VNĐ</span>
+                            <span>290.000 VNĐ</span>
+                        </div>
+                        <div class="book-price__button">
+                            <button><a class="no-style" href="single.html">Mua sách</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex;">
+            <button class="section__view-all">
+                Xem tất cả
+            </button>
+        </div>
+    </section>
+</main>
+<%- include ('../partials/_footer.ejs') %> 

@@ -1,0 +1,60 @@
+<footer>
+    <div class="footer-left">
+        <nav>
+            <h3>Store</h3>
+            <ul class="footer-nav">
+                <li><a href="">Men</a></li>
+                <li><a href="">Women</a></li>
+                <li><a href="">Children</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <h3>About</h3>
+            <ul class="footer-nav">
+                <li><a href="">Men</a></li>
+                <li><a href="">Women</a></li>
+                <li><a href="">Children</a></li>
+            </ul>
+        </nav>
+    </div>
+    <nav class="footer-right">
+        <h3>Subscribe</h3>
+        <span>Tt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</span>
+        <div class="footer-input">
+            <input type="email" placeholder="Nhập email"/>
+            <button>Gửi</button>
+        </div>
+    </nav>
+</footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script type="text/javascript">
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        dots: false,
+        nav: true,
+        autoplay: true,
+        navText: ["<span class='slide--slide-left'><i class='fas fa-chevron-left'></i></span>", "<span class='slide--slide-right'><i class='fas fa-chevron-right'></i></span>"],
+        responsive:{
+            1:{
+                items:1
+            },
+            425:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
+        }
+    });
+
+    var closesIcon = document.querySelectorAll('.xd-message .close-icon');
+
+    closesIcon.forEach(function(closeIcon) {
+        closeIcon.addEventListener('click', function() {
+            this.parentNode.parentNode.classList.add('hide');
+        });
+    });
+</script>
+</body>
+</html>

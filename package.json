@@ -1,0 +1,32 @@
+{
+  "name": "book-store-app",
+  "version": "1.0.0",
+  "description": "--- * This Site is a mini Project using NodeJS. Which has a Customer Panel and a Admin Panel.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.1.1",
+    "bcrypt": "^4.0.1",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-session": "^1.17.1",
+    "method-override": "^3.0.0",
+    "moment": "^2.26.0",
+    "mongodb": "^4.4.1",
+    "mongoose": "^5.13.14",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "stripe": "^8.56.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

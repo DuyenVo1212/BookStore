@@ -1,0 +1,46 @@
+<% if(typeof errors!= 'undefined'){ %>
+        <div class="xd-message msg-danger">
+            <div class="xd-message-icon">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="xd-message-content">
+                <p>
+                <% errors.forEach(error => { %>
+                        <i class="fas fa-dot-circle"></i>&nbsp; <%= error.msg  %>
+                    <br/>
+                <% }) %>
+                </p>
+            </div>
+            <a href="#" class="xd-message-close">
+                <i class="close-icon ion-close-round"></i>
+            </a>
+        </div>
+    <% } %>
+        <% if(e_m != ''){ %>
+            <div class="xd-message msg-warning">
+                <div class="xd-message-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="xd-message-content">
+                    <p><%= e_m  %></p>
+                </div>
+                <a href="#" class="xd-message-close">
+                    <i class="close-icon ion-close-round"></i>
+                </a>
+            </div>
+
+            <%  } %>
+                <% if(s_m != ''){ %>
+                    <div class="xd-message msg-success">
+                        <div class="xd-message-icon">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div class="xd-message-content">
+                            <p><%= s_m  %></p>
+                        </div>
+                        <a href="#" class="xd-message-close">
+                            <i class="close-icon ion-close-round"></i>
+                        </a>
+                    </div>
+
+                    <%  } %>
