@@ -1,19 +1,23 @@
 <div class="form-group">
-    <label for="Title">Book Title</label>
+    <label for="Title">Tên sách</label>
     <input required type="text" class="form-control" id="Title" name="title" value="<%= typeof book !== 'undefined' ? book.title : ''%> ">
   </div>
+<div class="form-group">
+    <label for="Title">Tác giả</label>
+    <input required type="text" class="form-control" id="Title" name="author" value="<%= typeof book !== 'undefined' ? book.author : ''%> ">
+</div>
   <div class="form-group">
-    <label for="image">Book Cover Url</label>
+    <label for="image">Ảnh bìa</label>
     <input required type="url" class="form-control" id="image" name="image" value="<%= typeof book !== 'undefined' ? book.image : ''%> ">
   </div>
   <div class="form-group">
-      <label for="description">Book Description</label>
+      <label for="description">Mô tả sách</label>
       <textarea required name="description" class="form-control" id="description" rows="3"><%= typeof book !== 'undefined' ? book.description : ''%></textarea>
     </div>
   <div class="form-group">
-      <label class="form-check-label" for="price">Book Price</label>
+      <label class="form-check-label" for="price">Giá sách</label>
       <input required type="number" name="price" class="form-control" id="Title" value="<%= typeof book !== 'undefined' ? book.price : ''%>">
   </div>
-  <button type="submit" class="btn btn-success"><%= typeof book === 'undefined' ? 'Create' : 'Update'%></button>
-  <a href="<%= typeof book === 'undefined' ? '/books' : `/books/view/${book._id}`%>" class="btn btn-success">Go Back</a>
+  <button type="submit" class="btn btn-success"><%= typeof book === 'undefined' ? 'Tạo mới' : 'Cập nhật'%></button>
+  <a href="<%= typeof book === 'undefined' ? '/books' : `/books/view/${book._id}`%>" class="btn btn-success">Quay lại</a>
 

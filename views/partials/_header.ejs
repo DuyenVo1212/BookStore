@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/js/assets/owl.carousel.min.css"/>
     <link rel="stylesheet" href="/js/assets/owl.theme.default.min.css" />
-    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -20,7 +20,7 @@
         <nav class="menu">
             <ul class="menu__wrapper">
                 <li class="menu__item"><a href="/books">Trang chủ</a></li>
-                <li class="menu__item"><a href="/books">Shop</a></li>
+                <li class="menu__item"><a href="/books/list">Shop</a></li>
                 <li class="menu__item">Ebooks</li>
                 <li class="menu__item">Liên hệ</li>
             </ul>
@@ -32,12 +32,9 @@
                 <% } else{%>
                     <span class="lead mr-2 capital user-name-home">Xin chào, <a href="/users/dashboard" class="btn btn-sm btn-success d-inline"><%= user.name  %></a> </span>
                 <% } %>
-                <% if(typeof user !== 'undefined' && user.role === 'admin'){ %>
-                    <a href="/books/new" class="btn btn-sm btn-primary">Thêm sách mới</a>
-                <% } %>
             </span>
             <span class="cart__wrapper">
-                 <i class="fas fa-shopping-cart"></i>
+                <a href="/users/dashboard?view=cart"><i class="fas fa-shopping-cart"></i></a>
             </span>
         </div>
     </div>

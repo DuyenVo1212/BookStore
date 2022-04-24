@@ -1,57 +1,152 @@
-<%- include ('../partials/_footer.ejs')  %>
 
-    <div class="container mt-2">
-        <div class="jumbotron position-relative">
-            <div class="row">
-                <a href="/books" class="view-back-btn btn btn-success position-absolute">Back to Store</a>
-                <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
-                    <img style="width: 18rem;" src="<%= book.image %> " alt="" class="view-img-book img-responsive">
+<%- include ('../partials/_header.ejs')  %>
+<main>
+    <div class="list-page is-single">
+        <div class="main-right">
+            <h1>THƯ VIỆN SÁCH</h1>
+        </div>
+    </div>
+    <div class="book-detail">
+        <div class="book-information">
+            <div class="book-img">
+                <img src="<%= book.image %> ">
+                <div class="book-desc">
+                    <h2 class="book-name">
+                        <%= book.title %>
+                    </h2>
+                    <div class="book-author">
+                        <span><%= book.author %></span>
+                    </div>
+                    <div class="book-price">
+                        <%= book.price %> VNĐ
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    <h1 class="display-4 text-success text-center"><%= book.title %></h1>
-                    <hr class="my-2">
-                    <p><%= book.description %></p>
-                    <h3 class="lead text-danger">Price: ₹ <%= book.price %></h3>
-                    <hr class="mb-2">
-                    <% if(typeof user !== 'undefined' && user.role === 'admin'){ %> 
-                        <a href="/books/edit/<%= book._id %>" class="btn btn-primary">Edit Details</a>
-                        <form action="/books/delete/<%= book._id  %>?_method=DELETE" class="d-inline" method="POST">
-                            <button type="submit" class="btn btn-danger">Delete Book</button>
-                        </form>
-                    <% }else if(typeof user === 'undefined' || typeof user !== 'undefined' && user.carts.findIndex(item=> item.book.equals(book._id))===-1){ %> 
-                    <form action="/users/cart/<%= book._id  %>?_method=PUT" class="d-inline" method="POST">
-                        <button type="submit" class="btn btn-warning">Add to Cart</button>
-                    </form>
-                <% }else{ %>
-                    <p class="lead text-secondary">Item in Your Cart <a href="/users/dashboard" class="btn btn-primary d-inline">Go to Cart</a></p>
-                <% } %>  
-                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="book-informationMore">
+        <div class="book-left">
+            <div class="book-rating">
+                <i class="fas fa-star is-active"></i>
+                <i class="fas fa-star is-active"></i>
+                <i class="fas fa-star is-active"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="book-tag">
+                <span>Tiểu thuyết</span>
+                <span>Truyện ngắn</span>
             </div>
         </div>
-        <div class="jumbotron p-3">
-            <div class="d-flex justify-content-end">
-                <a href="/books/<%= book._id  %>/comments/new" class="btn btn-secondary">Add a Comment</a>
-            </div>
-            <div class="container mt-2">
-                <ul class="list-group">
-                    <% book.comments.forEach(comment=>{ %>
-                        <li class="list-group-item">
-                            <span class="lead text-primary capital font-weight-bold"><%= comment.author.name  %></span>
-                            <p class="text-dark font-weight-bold"><%= comment.title  %> </p>
-                            <p><%= comment.content  %> </p>
-                            <p class="text-secondary"><%= comment.createdAt.toLocaleDateString()  %> <%= comment.createdAt.toLocaleTimeString()  %></p>
-                            <% if(typeof user !== 'undefined' && comment.author.id.equals(user._id)){ %> 
-                                <a href="/books/<%= book._id  %>/comments/<%= comment._id %>/edit" class="btn btn-warning">Edit Comment</a>
-                                <form action="/books/<%= book._id %>/comments/<%= comment._id %>/delete?_method=DELETE" class="d-inline" method="POST">
-                                    <button type="submit" class="btn btn-danger">Delete Comment</button>
-                                </form>
-                            <% } %> 
-                        </li>
-                    <% }) %>
-                </ul> 
+        <div class="book-right">
+            <span>Mô tả</span><br/>
+            <span><%= book.description %></span>
+            <hr style="margin: 50px 0;"/>
+            <div class="book-order">
+                <form action="/users/cart/<%= book._id  %>?_method=PUT" class="d-inline" method="POST">
+                    <button type="submit" class="btn btn-warning">Thêm vào giỏ hàng</button>
+                </form>
             </div>
         </div>
     </div>
 
+    <div class="book-comment">
+        <hr/>
+        <h3>Đánh giá của khách hàng</h3>
+        <div class="rating-zone">
+            <div class="total-rating">
+                <div class="total-rating__number">
+                    <span>4</span>
+                    <span>/5</span>
+                </div>
+                <div class="total-rating__star book-rating">
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="total-rating__total">
+                    165 Đánh giá
+                </div>
+            </div>
+            <div class="rating-detail">
+                <div class="rating-row book-rating">
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <div class="progress none"></div>
+                </div>
+                <div class="rating-row book-rating">
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star"></i>
+                    <div class="progress"></div>
+                    <div class="rating-text">(165)</div>
+                </div>
+                <div class="rating-row book-rating">
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <div class="progress none"></div>
+                </div>
+                <div class="rating-row book-rating">
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <div class="progress none"></div>
+                </div>
+                <div class="rating-row book-rating">
+                    <i class="fas fa-star is-active"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <div class="progress none"></div>
+                </div>
+            </div>
+        </div>
+        <div class="rating-comment">
+            <% book.comments.forEach(comment=>{ %>
+                <div class="comment-row">
+                    <div class="comment-avatar">
+                        <img src="https://www.tnex.com.vn/wp-content/uploads/2021/08/Artboard-14.png"/>
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-name"><%= comment.author.name  %></div>
+                        <div class="comment-date"><%= comment.createdAt.toLocaleDateString()  %> <%= comment.createdAt.toLocaleTimeString()  %></div>
+                        <div class="comment-rating book-rating">
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star is-active"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="comment-text"><%= comment.content  %>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
 
-<%- include ('../partials/_header.ejs')  %> 
+        </div>
+        <div class="d-flex justify-content-end">
+            <a href="/books/<%= book._id  %>/comments/new" class="btn btn-secondary">Thêm bình luận</a>
+        </div>
+    </div>
+    <div class="main-left is-single">
+        <div class="top-img">
+            <img src="../../images/navimg.png"/>
+        </div>
+    </div>
+</main>
+
+<%- include ('../partials/_footer.ejs')  %>

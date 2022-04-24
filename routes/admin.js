@@ -9,8 +9,7 @@ router.get('/', checkAuthorization, async (req, res) => {
     const books = await Book.find();
     const users = await User.find();
     const orders = await Order.find().sort({createdAt:-1}).populate("user").populate("details.book").exec();
-    console.log(orders);
-    res.render('admin/dashboard', {admin: req.user, books, users, orders});
+    res.render('admin/dashboard', {admin: req.user, books, users, orders, user: req.user, view: req.query.view});
 });
 
 module.exports = router;

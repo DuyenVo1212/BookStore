@@ -114,12 +114,12 @@ router.put('/cart/:id',  checkAuthentication , async (req, res)=>{
                 console.log(err);
                 res.redirect('back');
             }else{
-                 res.redirect('/users/dashboard');
+                 res.redirect('/users/dashboard?view=cart');
             }
         });
     }catch(e){
         console.log(e);
-         res.redirect('back');
+        res.redirect('back');
     }
 });
 
@@ -134,7 +134,7 @@ router.delete('/cart/:id/delete', checkAuthentication , async (req, res) => {
                 console.log(err);
                 res.redirect('back');
             }else{
-                 res.redirect('/users/dashboard');
+                res.redirect('/users/dashboard?view=cart');
             }
         });
     }catch(e){
@@ -150,7 +150,7 @@ router.get('/dashboard', checkAuthentication ,(req, res) => {
                 res.redirect('/books');
             }else{
                 //  res.json(user);
-                res.render('users/dashboard', {user: user});
+                res.render('users/dashboard', {user: user, view: req.query.view});
             }
         });
     }else{
@@ -191,7 +191,7 @@ router.post('/order', checkAuthentication, async (req, res) => {
     });
     User.findById(req.user.id).populate("carts.book").exec( async(err, user)=>{
         if(err){
-            req.flash('error', 'Could not Process Your Payment')
+            req.flash('error', 'Không thể đặt đơn của bạn')
             res.redirect('/books');
         }else{
             let total = 0;
@@ -200,9 +200,9 @@ router.post('/order', checkAuthentication, async (req, res) => {
            });
            const charge = await stripe.charges.create({
                 customer: customer.id,
-                description: "Book Store Orders",
-                amount: total * 100,
-                currency: 'inr',
+                description: "Đặt hàng sách",
+                amount: total,
+                currency: 'vnd',
             });
             try {
                 const order = new Order({
@@ -215,7 +215,7 @@ router.post('/order', checkAuthentication, async (req, res) => {
                 updatedUser.carts = [];
                 await User.findByIdAndUpdate(updatedUser.id, updatedUser);
 
-                req.flash('success', 'Your Orders are Successful. Order Invoice Sent to your Mail');
+                req.flash('success', 'Bạn đã đặt hàng thành công. Đơn hàng sẽ được gửi đến email của bạn');
                 res.redirect('/users/orders');
             } catch (e) {
                  res.json(e);
@@ -226,7 +226,18 @@ router.post('/order', checkAuthentication, async (req, res) => {
 
 router.get('/orders', checkAuthentication, async (req, res) => {
     const orders = await Order.find({user: req.user}).sort({createdAt:-1}).populate("details.book").exec();
-    res.render('users/orders', {orders});
+    res.render('users/orders', {orders, user: req.user});
+});
+
+router.get('/cart', checkAuthentication, async (req, res) => {
+    User.findById(req.user.id).populate("carts.book").exec((err, user)=>{
+        if(err){
+            res.redirect('/books');
+        }else{
+            //  res.json(user);
+            res.render('users/cart', {user: user});
+        }
+    });
 });
 
 

@@ -1,7 +1,7 @@
-<%- include ('../partials/_header.ejs')  %>
+<%- include ('../partials/_header.ejs') %>
 </header>
 <div class="register-wrapper">
-    <%- include ('../partials/_msg.ejs')  %>
+    <%- include ('../partials/_msg.ejs') %>
     <div class="container">
         <div class="login-title"><h1>Đăng Ký</h1></div>
     </div>
@@ -12,19 +12,23 @@
             <form action="/users/register" method="POST">
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input required type="text" id="name"  class="login__input" placeholder="Tên của bạn" name="name" value="<%= typeof newUser == 'undefined' ? '' : newUser.name %>"/>
+                    <input required type="text" id="name" class="login__input" placeholder="Tên của bạn" name="name"
+                           value="<%= typeof newUser == 'undefined' ? '' : newUser.name %>"/>
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-envelope"></i>
-                    <input required type="email" id="email"  class="login__input" placeholder="Email" name="email" value="<%= typeof newUser == 'undefined' ? '' : newUser.email %>" />
+                    <input required type="email" id="email" class="login__input" placeholder="Email" name="email"
+                           value="<%= typeof newUser == 'undefined' ? '' : newUser.email %>"/>
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-lock"></i>
-                    <input required type="password" class="login__input" id="password" placeholder="Mật khẩu" name="password" value="<%= typeof newUser == 'undefined' ? '' : newUser.password %>">
+                    <input required type="password" class="login__input" id="password" placeholder="Mật khẩu"
+                           name="password" value="<%= typeof newUser == 'undefined' ? '' : newUser.password %>">
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-lock"></i>
-                    <input required type="password" class="login__input" id="password" placeholder="Xác nhận mật khẩu" name="password_confirmed" >
+                    <input required type="password" class="login__input" id="password" placeholder="Xác nhận mật khẩu"
+                           name="password_confirmed">
                 </div>
                 <div class="login__field">
                     <input required type="checkbox" id="password" name="accept"> Tôi đồng ý với các điều khoản
@@ -35,4 +39,4 @@
         </div>
     </div>
 </div>
-        <%- include ('../partials/_footer.ejs')  %>
+<%- include ('../partials/_footer.ejs') %>

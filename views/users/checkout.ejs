@@ -1,65 +1,222 @@
 <%- include ('../partials/_header.ejs') %>
-<nav class="navbar navbar-light bg-light">
-    <span class="navbar-brand mb-0 lead">
-        <img src="https://cdn3.iconfinder.com/data/icons/book-shop-category-ouline/512/Book_Shop_Category-10-512.png" alt="" style="height: 2.5em; width: 2.5em;" class="img-thumbnail rounded-circle">
-        Book Store</span>
-    <span>
-        <a href="/users/dashboard" class="btn btn-sm btn-info">Cancel</a>  
-    </span>
-  </nav>
-  <div class="container mt-3">
-        <div class="jumbotron p-3">
-            <div class="d-flex justify-content-around" style="font-size: 25px; color: darkblue;">
-                <span>Your Checkout Summary</span> 
+<main>
+    <div class="list-page">
+        <div class="main-left">
+            <div class="top-img">
+                <img src="../../images/navimg.png" />
             </div>
-            <div class="container mt-2">
-                <table class="table table-bordered bg-light table-responsive-sm">
-                    <thead>
-                      <tr>
-                        <th scope="col">Cover</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Item Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <% user.carts.forEach(cartItem=>{ %>
+            <nav class="menu">
+                <h3 class="menu-title">TRANG CÁ NHÂN</h3>
+                <ul>
+                    <li><a class="menu__item" href="/users/dashboard?view=cart">Giỏ hàng của bạn</a></li>
+                    <li><a class="menu__item" href="/users/dashboard?view=order">Đơn đặt hàng của bạn</a></li>
+                    <li><a class="menu__item" href="/users/logout">Đăng xuất</a></li>
+                </ul>
+
+            </nav>
+        </div>
+        <div class="main-right">
+            <% var title = "TRANG CÁ NHÂN"; %>
+            <h1><%= title %></h1>
+            <div class="list-zone">
+                <div class="container mt-3">
+                    <div class="jumbotron p-3">
+                        <div class="d-flex justify-content-around" style="font-size: 25px; color: darkblue;">
+                            <span>Thanh toán đơn đặt hàng</span>
+                        </div>
+                        <div class="container mt-2">
+                            <table class="table table-bordered bg-light table-responsive-sm">
+                                <thead>
                                 <tr>
-                                    <td><img src="<%= cartItem.book.image  %>" alt="Book Cover" class="img-thumbnail" style="height: 8rem; width: 8rem;"></td>
-                                    <td><%= cartItem.book.title  %> </td>
-                                    <td class="text-danger">₹ <%= cartItem.book.price  %> </td>
-                                    <td>
-                                        <%= cartItem.quantity %> 
-                                    </td>
-                                    <td class="text-danger">
-                                        ₹ <%= cartItem.quantity * cartItem.book.price  %> 
-                                    </td>
+                                    <th scope="col">Ảnh bìa</th>
+                                    <th scope="col">Tiêu đề</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Tổng tiền</th>
                                 </tr>
-                        <% }) %>
-                        <tr class="lead font-weight-bold text-primary">
-                            <td colspan="3">Grand Total</td>
-                            <td colspan="2"> ₹ <%= total  %> </td>
-                        </tr>
-                    </tbody>
-                  </table>
-            </div>
-            <hr class="my-3">
-            <div class="row">
-                <form action="/users/order" method="POST" class="mx-auto">
-                    <script
-                      src="https://checkout.stripe.com/checkout.js"
-                      class="stripe-button"
-                      data-key="pk_test_FlAojKcuIGhVk1nR6Tk2QHrD00nwi3ZZ18"
-                      data-name="BOOK STORE"
-                      data-description="Technology Books for Web development"
-                      data-amount="<%= total*100 %>"
-                      data-currency="inr"
-                      data-image="https://cdn3.iconfinder.com/data/icons/book-shop-category-ouline/512/Book_Shop_Category-10-512.png">
-                    </script>
-                </form>
+                                </thead>
+                                <tbody>
+                                <% user.carts.forEach(cartItem=>{ %>
+                                    <tr>
+                                        <td><img src="<%= cartItem.book.image %>" alt="Book Cover" class="img-thumbnail"
+                                                 style="height: 8rem; width: 8rem;"></td>
+                                        <td><%= cartItem.book.title %> </td>
+                                        <td class="text-danger"><%= cartItem.book.price %> VNĐ/td>
+                                        <td>
+                                            <%= cartItem.quantity %>
+                                        </td>
+                                        <td class="text-danger">
+                                            <%= cartItem.quantity * cartItem.book.price %> VNĐ
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                                <tr class="lead font-weight-bold text-primary">
+                                    <td colspan="3">Grand Total</td>
+                                    <td colspan="2"> <%= total %> VNĐ</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr class="my-3">
+                        <div class="row">
+                            <form action="/users/order" method="POST" class="mx-auto">
+                                <script
+                                        src="https://checkout.stripe.com/checkout.js"
+                                        class="stripe-button"
+                                        data-key="pk_test_FlAojKcuIGhVk1nR6Tk2QHrD00nwi3ZZ18"
+                                        data-name="DH Library"
+                                        data-description="Mua sách đi bạn"
+                                        data-amount="<%= total%>"
+                                        data-currency="vnd"
+                                        data-image="https://media.istockphoto.com/vectors/books-bookshelf-vector-icon-isolated-pile-of-books-stack-of-books-vector-id1292243574?k=20&m=1292243574&s=612x612&w=0&h=s1SwOqoaKZoTzQK8KlFV97pTe1JzWMwHOs9RQSB69SA=">
+                                </script>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-  </div>
+    </div>
 
-        <%- include ('../partials/_footer.ejs') %>
+
+</main>
+
+<div class="container">
+    <div class="jumbotron my-2">
+        <div class="container container-fluid text-center">
+            <h1 class="display-4">Admin Panel</h1>
+            <hr class="my-2">
+            <p class="lead">
+                Customize and Manage your Store Products.
+            </p>
+        </div>
+    </div>
+    <div class="jumbotron p-3">
+        <div class="d-flex justify-content-center" style="font-size: 25px; color: darkblue;">
+            List of Registered Customers
+        </div>
+
+    </div>
+    <div class="jumbotron p-3">
+        <div class="d-flex justify-content-center" style="font-size: 25px; color: darkblue;">
+            Orders Details
+        </div>
+
+    </div>
+</div>
+
+<!--    <span class="navbar-brand mb-0 lead">-->
+<!--        <img src="https://cdn3.iconfinder.com/data/icons/book-shop-category-ouline/512/Book_Shop_Category-10-512.png" alt="" style="height: 2.5em; width: 2.5em;" class="img-thumbnail rounded-circle">-->
+<!--        Book Store</span>-->
+<!--    <span>-->
+<!--        <a href="/books" class="btn btn-sm btn-success">Go to Store</a>-->
+<!--        <a href="/users/orders" class="btn btn-sm btn-info">Your Orders</a>-->
+</nav>
+<div class="container">
+    <div class="jumbotron my-2">
+        <div class="container container-fluid text-center">
+            <h1 class="display-4">Xin chào <strong class="capital"><%= user.name  %> </strong></h1>
+            <hr class="my-2">
+            <p class="lead">
+                Đây là trang cá nhân của bạn
+            </p>
+            <h5>
+                <span style="color: rgb(97, 91, 92);">Email:</span> <span><%= user.email  %></span>
+            </h5>
+        </div>
+    </div>
+    <div class="jumbotron p-3">
+        <div class="d-flex justify-content-around" style="font-size: 25px; color: darkblue;">
+            <span>Giỏ hàng của bạn <%= user.carts.length === 0 ? 'đang trống' : '' %></span>
+            <% if(user.carts.length !== 0)  {%>
+                <button type="button" class="lead btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
+                    Thanh toán
+                </button>
+            <% } %>
+        </div>
+        <div class="container mt-2">
+            <table class="table table-bordered bg-light table-responsive-sm">
+                <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Tùy chỉnh</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% user.carts.forEach(cartItem=>{ %>
+                    <tr>
+                        <td><img src="<%= cartItem.book.image  %>" alt="Book Cover" class="img-thumbnail" style="height: 8rem; width: 8rem;"></td>
+                        <td class="lead text-primary"><%= cartItem.book.title  %> </td>
+                        <td class="lead text-danger">₹ <%= cartItem.book.price  %> </td>
+                        <td>
+                            <form action="/users/cart/<%= cartItem.book._id  %>/delete?_method=DELETE" class="d-inline" method="POST">
+                                <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <% if(user.carts.length !== 0)  {%>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Điều chỉnh giỏ hàng</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="/users/checkout">
+                        <div class="modal-body">
+                            <div class="container mt-2">
+                                <table class="table table-bordered bg-light table-responsive-sm">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Tên sản phẩm</th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Số lượng</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <% user.carts.forEach(cartItem=>{ %>
+                                        <tr>
+                                            <td class="lead text-primary"><%= cartItem.book.title  %> </td>
+                                            <td class="lead text-danger">₹ <%= cartItem.book.price  %> </td>
+                                            <td>
+                                                <select
+                                                        name="<%= cartItem.book._id %>"
+                                                        class="form-control">
+                                                    <% for(let i=1;i<=10;i++){ %>
+                                                        <% if(cartItem.quantity === i){ %>
+                                                            <option selected><%= i %></option>
+                                                        <% }else{ %>
+                                                            <option><%= i  %> </option>
+                                                        <% } %>
+                                                    <% } %>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary">Thanh toán</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+
+
+<%- include ('../partials/_footer.ejs') %>

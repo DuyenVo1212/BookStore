@@ -9,6 +9,11 @@ router.get('/',  async(req, res) => {
     res.render('books/home', {books: books, user: req.user});
 });
 
+router.get('/list',  async(req, res) => {
+    const books = await Book.find({});
+    res.render('books/list', {books: books, user: req.user});
+});
+
 router.get('/view/:id', (req, res)=>{
     Book.findById(req.params.id).populate('comments').exec((err, book)=>{
         if(err){
@@ -28,6 +33,7 @@ router.post('/new', checkAuthorization ,async (req, res) => {
     const book = {
         title: req.body.title,
         image: req.body.image,
+        author: req.body.author,
         description: req.body.description,
         price:  parseFloat(req.body.price)
     };
@@ -66,6 +72,7 @@ router.delete('/delete/:id', checkAuthorization ,async (req, res) => {
     await Book.findByIdAndDelete(req.params.id);
     res.redirect('/books');
 });
+
 
 
 
