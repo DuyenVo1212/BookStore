@@ -33,31 +33,31 @@
                         <table class="table table-bordered bg-light table-responsive-sm">
                             <thead>
                             <tr>
-                                <th scope="col">id</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Details</th>
-                                <th scope="col">Date</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Tổng tiền</th>
+                                <th scope="col">Chi tiết</th>
+                                <th scope="col">Ngày</th>
                             </tr>
                             </thead>
                             <tbody>
                             <% orders.forEach(order=>{ %>
                                 <tr>
                                     <td><%= order._id  %> </td>
-                                    <td class="text-danger">₹ <%= order.amount  %> </td>
+                                    <td class="text-danger"><%= order.amount  %> VNĐ</td>
                                     <td>
                                         <table class="table table-bordered bg-light table-responsive-sm">
                                             <thead>
                                             <tr>
-                                                <th scope="col">Title</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Tiêu đề</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Số lượng</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <% order.details.forEach(cartItem=>{ %>
                                                 <tr>
                                                     <td><%= cartItem.book.title  %> </td>
-                                                    <td class="text-danger">₹ <%= cartItem.book.price  %> </td>
+                                                    <td class="text-danger"><%= cartItem.book.price  %> VNĐ</td>
                                                     <td>
                                                         <%= cartItem.quantity %>
                                                     </td>
