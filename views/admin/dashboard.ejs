@@ -20,14 +20,17 @@
             <% var title = "TRANG QUẢN TRỊ"; %>
             <% if (view == 'books') title = "QUẢN LÝ SÁCH TRONG HỆ THỐNG" %>
             <% if (view == 'users') title = "QUẢN LÝ NGƯỜI DÙNG HỆ THỐNG" %>
+            <% if (view == 'user-create') title = "TẠO MỚI NGƯỜI DÙNG" %>
             <% if (view == 'orders') title = "QUẢN LÝ ĐƠN ĐẶT HÀNG" %>
             <% if (view == 'book-create') title = "THÊM SÁCH MỚI" %>
+            <% if (view == 'category-create') title = "THÊM DANH MỤC MỚI" %>
             <h1><%= title %></h1>
             <div class="list-zone">
                 <% if(view == 'books') { %>
                     <div>
                         <a class="btn btn-black" href="/admin?view=book-create"><i class="fas fa-plus"></i> Thêm sách
                             mới</a>
+                        <a class="btn btn-black" href="/admin?view=category-create"><i class="fas fa-plus"></i> Thêm danh mục mới</a>
                     </div>
                     <div class="container mt-2">
                         <table class="table table-bordered bg-light table-responsive-sm" style="min-width: 100%">
@@ -64,12 +67,27 @@
                         <%- include ('../books/_bookForm.ejs') %>
                     </form>
                 <% } %>
+                <% if (view == 'user-create') { %>
+                    <form method="POST" action="/users/register">
+                        <%- include ('../users/_userForm.ejs') %>
+                    </form>
+                <% } %>
+                <% if (view == 'category-create') { %>
+                    <form method="POST" action="/categories/new">
+                        <%- include ('../categories/_categoriesForm.ejs') %>
+                    </form>
+                <% } %>
                 <% if (view == 'users') { %>
+                        <div>
+                            <a class="btn btn-black" href="/admin?view=user-create"><i class="fas fa-plus"></i> Thêm người dùng
+                                mới</a>
+                        </div>
                     <div class="container mt-2">
                         <table class="table table-bordered bg-light table-responsive-sm">
                             <thead>
                             <tr>
                                 <th scope="col">Tên</th>
+                                <th scope="col">Chức vụ</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">ID</th>
                             </tr>
@@ -79,6 +97,7 @@
                                 <% if(user.role !== 'admin') { %>
                                     <tr>
                                         <td style="text-transform: capitalize;"><%= user.name %> </td>
+                                        <td><%= user.role %> </td>
                                         <td><%= user.email %> </td>
                                         <td><%= user._id %> </td>
                                     </tr>

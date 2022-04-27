@@ -20,6 +20,15 @@ const bookSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    sale: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category"
+    },
     comments:[
         {
             type: mongoose.Schema.Types.ObjectId,

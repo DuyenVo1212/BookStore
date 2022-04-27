@@ -1,0 +1,26 @@
+<div class="form-group">
+    <label for="name">Tên người dùng</label>
+    <input required type="text" class="form-control" id="name" name="name" value="<%= typeof newUser !== 'undefined' ? newUser.name : ''%> ">
+</div>
+<div class="form-group">
+    <label for="email">Email</label>
+    <input required type="email" class="form-control" id="email" name="email" value="<%= typeof newUser !== 'undefined' ? newUser.email : ''%> ">
+</div>
+<div class="form-group">
+    <label for="Title">Chức vụ</label>
+    <select class="form-control" name="category">
+        <option value="customer">Customer</option>
+        <option value="admin">Admin</option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="image">Mật khẩu</label>
+    <input required type="password" class="form-control" id="image" name="password">
+</div>
+<div class="form-group">
+    <label for="image">Nhập lại mật khẩu</label>
+    <input required type="password" class="form-control" id="image" name="password_confirmed">
+</div>
+<input type="hidden" value="admin-create" name="check">
+<button type="submit" class="btn btn-success"><%= typeof book === 'undefined' ? 'Tạo mới' : 'Cập nhật'%></button>
+

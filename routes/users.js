@@ -61,6 +61,11 @@ router.post('/register', async (req, res) => {
         });
     }
     if (errors.length > 0) {
+        if (req.body.check == 'admin-create') {
+            req.flash('success', 'có lỗi xảy ra');
+            res.redirect('/admin?view=user-create');
+            return;
+        }
         res.render('users/register', { errors: errors, newUser: newUser });
     } else {
         try {
@@ -73,9 +78,21 @@ router.post('/register', async (req, res) => {
                 });
                 await savedUser.save();
                 // Mail Options
+                if (req.body.check == 'admin-create') {
+                    req.flash('success', 'Tạo thành công!');
+                    res.redirect('/admin?view=users');
+                    return;
+
+                }
                 req.flash('success', 'Đăng ký thành công. Vui lòng đăng nhập!');
                 res.redirect('/users/login');
             } catch (e) {
+                if (req.body.check == 'admin-create') {
+                    req.flash('success', 'Tạo thành công!');
+                    res.redirect('/admin?view=user-create');
+                    return;
+
+                }
                 res.render('users/register', { errors: { msg: 'Lỗi dữ liệu!' }, newUser: newUser });
             }
         } catch (e) {

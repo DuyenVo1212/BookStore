@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Book = require('../models/Book');
+const Category = require('../models/Category');
 // const checkAuthentication = require('../middleware/checkAuthentication');
 const checkAuthorization = require('../middleware/checkAuthorization');
 
@@ -10,8 +11,13 @@ router.get('/',  async(req, res) => {
 });
 
 router.get('/list',  async(req, res) => {
-    const books = await Book.find({});
-    res.render('books/list', {books: books, user: req.user});
+    var books = await Book.find({});
+    if (req.query.cat) {
+        books = await Book.find({category: req.query.cat});
+    }
+
+    const categories = await Category.find({});
+    res.render('books/list', {books: books, categories, user: req.user});
 });
 
 router.get('/view/:id', (req, res)=>{
@@ -26,7 +32,8 @@ router.get('/view/:id', (req, res)=>{
 });
 
 router.get('/new', checkAuthorization ,(req, res) => {
-    res.render('books/new');
+    const categories = Category.find({});
+    res.render('books/new', {categories});
 });
 
 router.post('/new', checkAuthorization ,async (req, res) => {
@@ -35,31 +42,43 @@ router.post('/new', checkAuthorization ,async (req, res) => {
         image: req.body.image,
         author: req.body.author,
         description: req.body.description,
-        price:  parseFloat(req.body.price)
+        price:  parseFloat(req.body.price),
+        sale: parseFloat(req.body.sale)
     };
     try{
         const newBook = new Book(book);
+        const foundCate = await Category.findById(req.body.category);
+        newBook.category = foundCate;
         await newBook.save();
+
+        foundCate.books.push(newBook);
+        const savedCate =  await foundCate.save();
         res.redirect(`/books/view/${newBook._id}`);
     }catch(e){
         console.log(e);
-        res.render('books/new', {book: book});
+        const categories = Category.find({});
+        res.redirect('books/new', {book: book, categories});
     }
 });
 
 router.get('/edit/:id', checkAuthorization ,async (req, res)=>{
     const book = await Book.findById(req.params.id);
-    res.render('books/edit', {book: book});
+    const categories = await Category.find({});
+    res.render('books/edit', {categories, book});
 });
 router.put('/edit/:id', checkAuthorization ,async (req, res)=>{
     const book = {
         title: req.body.title,
         image: req.body.image,
         description: req.body.description,
-        price:  parseFloat(req.body.price)
+        price:  parseFloat(req.body.price),
+        sale: parseFloat(req.body.sale),
+        author: req.body.author,
     };
     try{
         const updatedBook = await Book.findByIdAndUpdate(req.params.id, book);
+        const foundCate = await Category.findById(req.body.category);
+        updatedBook.category = foundCate;
         await updatedBook.save();
         res.redirect(`/books/view/${updatedBook._id}`);
     }catch(e){
@@ -70,7 +89,7 @@ router.put('/edit/:id', checkAuthorization ,async (req, res)=>{
 
 router.delete('/delete/:id', checkAuthorization ,async (req, res) => {
     await Book.findByIdAndDelete(req.params.id);
-    res.redirect('/books');
+    res.redirect('/admin?view=books');
 });
 
 
