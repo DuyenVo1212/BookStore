@@ -50,15 +50,58 @@
                                             </td>
                                         </tr>
                                     <% }) %>
-                                    <tr class="lead font-weight-bold text-primary">
-                                        <td colspan="3">Grand Total</td>
-                                        <td colspan="2"><%= total %> VNĐ</td>
-                                    </tr>
-                                </tbody>
-                                
 
-                            </table>
-                        </div>
+                                    <tr>
+                                        <!-- the shipping fee is 20000 vnd-->
+                                        <td colspan="4" class="text-right">Shipping fee</td>
+                                        <td class="text-danger">20000 VND</td>
+                                      </tr>
+                                      <tr class="lead font-weight-bold text-primary">
+                                        <td colspan="3">Total</td>
+                                        <td colspan="2"><%= total + 20000 %> VND</td>
+                                      </tr>
+                                      <tr>
+                                        <!-- requires the buyer to enter the delivery address-->
+                                        <td colspan="5">
+                                          <form action="/users/checkout" method="post">
+                                            <div class="form-group">
+                                              <label for="address">Delivery address</label>
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                id="address"
+                                                name="address"
+                                                placeholder="Enter delivery address"
+                                              />
+                                            </div>
+                                            <div class="form-group">
+                                              <label for="phone">Phone number</label>
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                id="phone"
+                                                name="phone"
+                                                placeholder="Enter phone number"
+                                              />
+                                            </div>
+                                            <div class="form-group">
+                                              <label for="note">Notes</label>
+                                              <textarea
+                                                class="form-control"
+                                                id="note"
+                                                name="note"
+                                                rows="3"
+                                              ></textarea>
+                                            </div>
+                                            <!-- <button type="submit" class="btn btn-primary">Checkout</button> -->
+                                          </form>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                    
+                           
                         <hr class="my-3">
                         <div class="row">
                             <form action="/users/order" method="POST" class="mx-auto">
@@ -81,56 +124,12 @@
     </div>
 </main>
 
-<div class="container">
-    <div class="jumbotron my-2">
-        <div class="container container-fluid text-center">
-            <h1 class="display-4">Admin Panel</h1>
-            <hr class="my-2">
-            <p class="lead">
-                Customize and Manage your Store Products.
-            </p>
-        </div>
-    </div>
-    <div class="jumbotron p-3">
-        <div class="d-flex justify-content-center" style="font-size: 25px; color: darkblue;">
-            List of Registered Customers
-        </div>
-
-    </div>
-    <div class="jumbotron p-3">
-        <div class="d-flex justify-content-center" style="font-size: 25px; color: darkblue;">
-            Orders Details
-        </div>
-
-    </div>
-</div>
-
-    <span class="navbar-brand mb-0 lead">
-        <img src="https://cdn3.iconfinder.com/data/icons/book-shop-category-ouline/512/Book_Shop_Category-10-512.png" alt="" style="height: 2.5em; width: 2.5em;" class="img-thumbnail rounded-circle">
-        Book Store</span>
-    <span>
-        <a href="/books" class="btn btn-sm btn-success">Go to Store</a>
-        <a href="/users/orders" class="btn btn-sm btn-info">Your Orders</a>
-</nav>
-<div class="container">
-    <div class="jumbotron my-2">
-        <div class="container container-fluid text-center">
-            <h1 class="display-4">Xin chào <strong class="capital"><%= user.name  %> </strong></h1>
-            <hr class="my-2">
-            <p class="lead">
-                This is your personal page
-            </p>
-            <h5>
-                <span style="color: rgb(97, 91, 92);">Email:</span> <span><%= user.email  %></span>
-            </h5>
-        </div>
-    </div>
     <div class="jumbotron p-3">
         <div class="d-flex justify-content-around" style="font-size: 25px; color: darkblue;">
             <span>Your shopping cart <%= user.carts.length === 0 ? 'empty' : '' %></span>
             <% if(user.carts.length !== 0)  {%>
                 <button type="button" class="lead btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
-                    Thanh toán
+                    Payment
                 </button>
             <% } %>
         </div>
@@ -216,9 +215,6 @@
         </div>
     <% } %>
 </div>
-
-
-
 <%- include ('../partials/_footer.ejs') %>
 
 
