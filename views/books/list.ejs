@@ -1,77 +1,125 @@
-<%- include ('../partials/_header.ejs')  %>
+<%- include ('../partials/_header.ejs') %>
 <main>
-    <div class="list-page">
-        <div class="main-left">
-            <div class="top-img">
-                <img src="/images/navimg.png" />
-            </div>
-            <nav class="menu">
-                <h3 class="menu-title">MENU</h3>
-                <ul>
-                    <% categories.forEach(cate => { %>
-                    <li><a class="menu__item" href="/books/list?cat=<%= cate._id %>"><%= cate.name %></a></li>
-<!--                    <li><a class="menu__item" href="/books/list?cat=2">Sách giảm giá</a></li>-->
-<!--                    <li><a class="menu__item" href="/books/list?cat=3">Tiểu thuyết</a></li>-->
-<!--                    <li><a class="menu__item" href="/books/list?cat=4">Manga - Comic</a></li>-->
-<!--                    <li><a class="menu__item" href="/books/list?cat=5">Chính trị</a></li>-->
-<!--                    <li><a class="menu__item" href="/books/list?cat=6">Sách ngoại ngữ</a></li>-->
-<!--                    <li><a class="menu__item" href="/books/list?cat=7">Marketing</a></li>-->
-<!--                    <li><a class="menu__item" href="/books/list?cat=8">Nghệ thuật</a></li>-->
-<!--                    <li><a class="menu__item" href="/books/list?cat=9">Trinh thám</a></li>-->
-<!--                    <li><a class="menu__item" href="/books/list?cat=10">Truyện ngắn</a></li>-->
-                     <% }) %>
-
-                </ul>
-
-            </nav>
-        </div>
-        <div class="main-right">
-            <h1>THƯ VIỆN SÁCH</h1>
-            <div class="list-zone">
-                <div class="list-zone__search">
-                    <div class="list-zone__select">
-                        Sắp xếp theo
-                        <select>
-                            <option>Giá thấp đến cao</option>
-                            <option>Giá cao đến thấp</option>
-                        </select>
-                    </div>
-                    <div class="list-zone__searchBox">
-                        <input type="text" placeholder="Tìm kiếm" />
-                        <i class="fas fa-search"></i>
-                    </div>
-                </div>
-                <div class="list-zone__bookList">
-                    <% books.forEach(book => { %>
-                    <div class="book-item">
-                        <a href="/books/view/<%= book._id %>">
-                            <div class="book-img">
-
-                                <img src="<%= book.image  %>" />
-                            </div>
-                        </a>
-                        <div class="book-name">
-                            <%= book.title %><br/>
-                            <small><%= book.author %></small>
-                        </div>
-                        <div class="book-price">
-                            <%= book.price %> VNĐ
-                        </div>
-                        <div class="book-rating">
-                            <i class="fas fa-star is-active"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <% }) %>
-
-                </div>
-            </div>
-        </div>
+  <div class="list-page">
+    <div class="main-left">
+      <div class="top-img">
+        <img src="/images/navimg.png" />
+      </div>
+      <nav class="menu">
+        <h3 class="menu-title">MENU</h3>
+        <ul>
+          <% categories.forEach(cate => { %>
+          <li>
+            <a
+              id="<%= cate._id %>"
+              class="menu__item"
+              href="/books/list?cat=<%= cate._id %>"
+              ><%= cate.name %>
+            </a>
+          </li>
+          <% }) %>
+        </ul>
+      </nav>
     </div>
+    <div class="main-right">
+      <h1>LIST</h1>
+      <div class="list-zone">
+        <div class="list-zone__search">
+          <div class="list-zone__select">
+            Sorted by
+            <select id="sapxep">
+              <option value="none">---Select---</option>
+              <option value="up">Latest</option>
+              <option value="down">Oldest</option>
+            </select>
+          </div>
+          <div class="list-zone__searchBox">
+            <input id="search" type="text" placeholder="Search" />
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+        <script>
+          const params = new URLSearchParams(location.search);
+          var search = document.getElementById("search");
+          var sapxep = document.getElementById("sapxep");
 
+          if (params.get("cat")) {
+            var cat = params.get("cat");
+            for (
+              var i = 0;
+              i < document.getElementsByClassName("menu__item").length;
+              i++
+            ) {
+              if (document.getElementsByClassName("menu__item")[i].id == cat) {
+                document
+                  .getElementsByClassName("menu__item")
+                  [i].classList.add("is-active");
+              }
+            }
+          } else {
+            var cat = "all";
+          }
 
+          if (params.get("search") != null) {
+            search.value = params.get("search");
+          } else {
+            search.value = "";
+          }
+
+          if (params.get("sapxep") == "up") {
+            sapexep.value = "up";
+          } else if (params.get("sapxep") == "down") {
+            sapexep.value = "down";
+          }
+
+          search.addEventListener("keyup", function (e) {
+            var key = e.keyCode || e.which;
+            if (key === 13) {
+              window.location.href =
+                "/books/list?cat=" +
+                cat +
+                "&search=" +
+                search.value +
+                "&sapxep=" +
+                sapxep.value;
+            }
+          });
+
+          sapexep.addEventListener("change", function (e) {
+            window.location.href =
+              "/books/list?cat=" +
+              cat +
+              "&search=" +
+              search.value +
+              "&sapxep=" +
+              sapxep.value;
+          });
+        </script>
+        <div class="list-zone__bookList">
+          <% books.forEach(book => { %>
+          <div class="book-item">
+            <a href="/books/view/<%= book._id %>">
+              <div class="book-img">
+                <img src="<%= book.image %>" />
+              </div>
+            </a>
+            <div class="book-name">
+              <%= book.title %><br />
+              <small><%= book.author %></small>
+            </div>
+            <div class="book-price"><%= book.price %></div>
+            <div class="book-rating">
+              <i class="fas fa-star is-active"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 <%- include ('../partials/_footer.ejs') %>

@@ -3,11 +3,11 @@
         <div class="login-wrapper">
             <%- include ('../partials/_msg.ejs')  %> 
             <div class="container">    
-                <div class="login-title"><h1>Đăng nhập</h1></div>
+                <div class="login-title"><h1>Sign in</h1></div>
             </div>
             <div class="login-container">
                 <div class="form-panel">
-                    <div class="form-title">Đăng nhập</div>
+                    <div class="form-title">Sign in</div>
                     <form action="/users/login" method="POST">
                         <div class="login__field">
                             <i class="login__icon fas fa-user"></i>
@@ -15,14 +15,14 @@
                         </div>
                         <div class="login__field">
                             <i class="login__icon fas fa-lock"></i>
-                            <input required type="password" class="login__input" id="password" placeholder="Mật khẩu" name="password" value="<%= typeof user == 'undefined' ? '' : user.password %>">
+                            <input required type="password" class="login__input" id="password" placeholder="Password" name="password" value="<%= typeof user == 'undefined' ? '' : user.password %>">
                         </div>
                         <div class="login__field">
-                            <input type="checkbox" id="password" name="remember_me"> Ghi nhớ đăng nhập
+                            <input type="checkbox" id="password" name="remember_me"> Save password for next login
                         </div>
-                        <button type="submit" class="button-primary w-100">Đăng nhập</button>
+                        <button type="submit" class="button-primary w-100">Sign in</button>
                         <hr/>
-                        <a href="/users/register" class="button-primary w-100">Đăng ký</a>
+                        <a href="/users/register" class="button-primary w-100">Sign up</a>
                     </form>
 
                 </div>

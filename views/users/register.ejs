@@ -1,42 +1,42 @@
 <%- include ('../partials/_header.ejs') %>
 </header>
 <div class="register-wrapper">
-    <%- include ('../partials/_msg.ejs') %>
-    <div class="container">
-        <div class="login-title"><h1>Đăng Ký</h1></div>
-    </div>
-    <div class="login-container">
-        <div class="form-panel">
-            <div class="form-title">Đăng Ký</div>
-            <span class="sub-title-login">Điền các thông tin để hoàn tất đăng ký</span>
-            <form action="/users/register" method="POST">
-                <div class="login__field">
-                    <i class="login__icon fas fa-user"></i>
-                    <input required type="text" id="name" class="login__input" placeholder="Tên của bạn" name="name"
-                           value="<%= typeof newUser == 'undefined' ? '' : newUser.name %>"/>
-                </div>
-                <div class="login__field">
-                    <i class="login__icon fas fa-envelope"></i>
-                    <input required type="email" id="email" class="login__input" placeholder="Email" name="email"
-                           value="<%= typeof newUser == 'undefined' ? '' : newUser.email %>"/>
-                </div>
-                <div class="login__field">
-                    <i class="login__icon fas fa-lock"></i>
-                    <input required type="password" class="login__input" id="password" placeholder="Mật khẩu"
-                           name="password" value="<%= typeof newUser == 'undefined' ? '' : newUser.password %>">
-                </div>
-                <div class="login__field">
-                    <i class="login__icon fas fa-lock"></i>
-                    <input required type="password" class="login__input" id="password" placeholder="Xác nhận mật khẩu"
-                           name="password_confirmed">
-                </div>
-                <div class="login__field">
-                    <input required type="checkbox" id="password" name="accept"> Tôi đồng ý với các điều khoản
-                </div>
-                <button type="submit" class="button-primary w-100">Đăng ký</button>
-            </form>
+     <%- include ('../partials/_msg.ejs') %>
+     <div class="container">
+         <div class="login-title"><h1>Register</h1></div>
+     </div>
+     <div class="login-container">
+         <div class="form-panel">
+             <div class="form-title">Register</div>
+             <span class="sub-title-login">Fill in the information to complete the registration</span>
+             <form action="/users/register" method="POST">
+                 <div class="login__field">
+                     <i class="login__icon fas fa-user"></i>
+                     <input required type="text" id="name" class="login__input" placeholder="Your name" name="name"
+                            value="<%= typeof newUser == 'undefined' ? '' : newUser.name %>"/>
+                 </div>
+                 <div class="login__field">
+                     <i class="login__icon fas fa-envelope"></i>
+                     <input required type="email" id="email" class="login__input" placeholder="Email" name="email"
+                            value="<%= typeof newUser == 'undefined' ? '' : newUser.email %>"/>
+                 </div>
+                 <div class="login__field">
+                     <i class="login__icon fas fa-lock"></i>
+                     <input required type="password" class="login__input" id="password" placeholder="Password"
+                            name="password" value="<%= typeof newUser == 'undefined' ? '' : newUser.password %>">
+                 </div>
+                 <div class="login__field">
+                     <i class="login__icon fas fa-lock"></i>
+                     <input required type="password" class="login__input" id="password" placeholder="Confirm password"
+                            name="password_confirmed">
+                 </div>
+                 <div class="login__field">
+                     <input required type="checkbox" id="password" name="accept"> I agree to the terms
+                 </div>
+                 <button type="submit" class="button-primary w-100">Subscribe</button>
+             </form>
 
-        </div>
-    </div>
+         </div>
+     </div>
 </div>
 <%- include ('../partials/_footer.ejs') %>

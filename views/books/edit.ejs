@@ -1,30 +1,39 @@
 <%- include ('../partials/_header.ejs') %>
 <main>
-    <div class="list-page">
-        <div class="main-left">
-            <div class="top-img">
-                <img src="../../images/navimg.png" />
-            </div>
-            <nav class="menu">
-                <h3 class="menu-title">Menu quản trị</h3>
-                <ul>
-                    <li><a class="menu__item" href="/admin?view=information">Thông tin cá nhân</a></li>
-                    <li><a class="menu__item" href="/admin?view=books">Quản lý sách</a></li>
-                    <li><a class="menu__item" href="/admin?view=users">Quản lý người dùng</a></li>
-                    <li><a class="menu__item" href="/admin?view=orders">Quản lý đơn đặt hàng</a></li>
-                    <li><a class="menu__item" href="/users/logout">Đăng xuất</a></li>
-                </ul>
-
-            </nav>
-        </div>
-        <div class="main-right">
-            <h1>Chỉnh sửa <%= book.title  %> </h1>
-            <div class="list-zone">
-                <form method="POST" action="/books/edit/<%= book._id  %>?_method=PUT">
-                    <%- include ('./_bookForm.ejs') %>
-                </form>
-            </div>
-        </div>
+  <div class="list-page">
+    <div class="main-left">
+      <div class="top-img">
+        <img src="../../images/navimg.png" />
+      </div>
+      <nav class="menu">
+        <h3 class="menu-title">Admin menu</h3>
+        <ul>
+          <li>
+            <a class="menu__item" href="/admin?view=information"
+              >Personal Information</a
+            >
+          </li>
+          <li>
+            <a class="menu__item" href="/admin?view=books">Manage books</a>
+          </li>
+          <li>
+            <a class="menu__item" href="/admin?view=users">Manage users</a>
+          </li>
+          <li>
+            <a class="menu__item" href="/admin?view=orders">Manage orders</a>
+          </li>
+          <li><a class="menu__item" href="/users/logout">Logout</a></li>
+        </ul>
+      </nav>
     </div>
+    <div class="main-right">
+      <h1>Edit <%= book.title %></h1>
+      <div class="list-zone">
+        <form method="POST" action="/books/edit/<%= book._id %>?_method=PUT">
+          <%- include ('./_bookForm.ejs') %>
+        </form>
+      </div>
+    </div>
+  </div>
 </main>
 <%- include ('../partials/_footer.ejs') %>

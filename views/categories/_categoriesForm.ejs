@@ -1,6 +1,14 @@
 <div class="form-group">
-    <label for="Title">Tên Danh mục</label>
-    <input required type="text" class="form-control" id="name" name="name" value="<%= typeof category !== 'undefined' ? category.name : ''%> ">
+  <label for="Title">Category Name</label>
+  <input
+    required
+    type="text"
+    class="form-control"
+    id="name"
+    name="name"
+    value="<%= typeof category !== 'undefined' ? category.name : ''%> "
+  />
 </div>
-<button type="submit" class="btn btn-success"><%= typeof category === 'undefined' ? 'Tạo mới' : 'Cập nhật'%></button>
-
+<button type="submit" class="btn btn-success">
+  <%= typeof category === 'undefined' ? 'Create New' : 'Update'%>
+</button>

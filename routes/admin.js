@@ -11,7 +11,18 @@ router.get('/', checkAuthorization, async (req, res) => {
     const users = await User.find();
     const orders = await Order.find().sort({createdAt:-1}).populate("user").populate("details.book").exec();
     const categories = await Category.find();
-    res.render('admin/dashboard', {admin: req.user, books, users, orders, categories, user: req.user, view: req.query.view});
+
+    const getCategoryName = (book) => {
+        if(book.category) {
+            const category = categories.find((category) => {
+                return category._id.toString() == book.category;
+            });
+            return category ? category.name : "none";
+        } else {
+            return "none";
+        }
+    }
+    res.render('admin/dashboard', {getCategoryName, admin: req.user, books, users, orders, categories, user: req.user, view: req.query.view});
 });
 
 module.exports = router;

@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 });
 
 
-
+app.use('/privacy', require('./routes/privacy'));
 app.use('/books', require('./routes/books'));
 app.use('/users', require('./routes/users'));
 app.use('/books/:id/comments', require('./routes/comments'));

@@ -167,6 +167,7 @@ router.get('/dashboard', checkAuthentication ,(req, res) => {
                 res.redirect('/books');
             }else{
                 //  res.json(user);
+                // console.log(user);
                 res.render('users/dashboard', {user: user, view: req.query.view});
             }
         });

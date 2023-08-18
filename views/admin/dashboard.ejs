@@ -1,173 +1,193 @@
-<%- include ('../partials/_header.ejs') %>
+<%- include('../partials/_header.ejs') %>
 <main>
-    <div class="list-page">
-        <div class="main-left">
-            <div class="top-img">
-                <img src="images/navimg.png"/>
-            </div>
-            <nav class="menu">
-                <h3 class="menu-title">Menu quản trị</h3>
-                <ul>
-                    <li><a class="menu__item" href="/admin?view=books">Quản lý sách</a></li>
-                    <li><a class="menu__item" href="/admin?view=users">Quản lý người dùng</a></li>
-                    <li><a class="menu__item" href="/admin?view=orders">Quản lý đơn đặt hàng</a></li>
-                    <li><a class="menu__item" href="/users/logout">Đăng xuất</a></li>
-                </ul>
-
-            </nav>
-        </div>
-        <div class="main-right">
-            <% var title = "TRANG QUẢN TRỊ"; %>
-            <% if (view == 'books') title = "QUẢN LÝ SÁCH TRONG HỆ THỐNG" %>
-            <% if (view == 'users') title = "QUẢN LÝ NGƯỜI DÙNG HỆ THỐNG" %>
-            <% if (view == 'user-create') title = "TẠO MỚI NGƯỜI DÙNG" %>
-            <% if (view == 'orders') title = "QUẢN LÝ ĐƠN ĐẶT HÀNG" %>
-            <% if (view == 'book-create') title = "THÊM SÁCH MỚI" %>
-            <% if (view == 'category-create') title = "THÊM DANH MỤC MỚI" %>
-            <h1><%= title %></h1>
-            <div class="list-zone">
-                <% if(view == 'books') { %>
-                    <div>
-                        <a class="btn btn-black" href="/admin?view=book-create"><i class="fas fa-plus"></i> Thêm sách
-                            mới</a>
-                        <a class="btn btn-black" href="/admin?view=category-create"><i class="fas fa-plus"></i> Thêm danh mục mới</a>
-                    </div>
-                    <div class="container mt-2">
-                        <table class="table table-bordered bg-light table-responsive-sm" style="min-width: 100%">
-                            <thead>
-                            <tr>
-                                <th scope="col">Trang bìa</th>
-                                <th scope="col">Tiêu đề</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Hành động</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <% books.forEach(book=>{ %>
-                                <tr>
-                                    <td><img src="<%= book.image %>" alt="Book Cover" class="img-thumbnail"
-                                             style="height: 100px; width: auto;"></td>
-                                    <td class="lead text-primary"><%= book.title %> </td>
-                                    <td class="lead text-danger"> <%= book.price %> ₫</td>
-                                    <td>
-                                        <a href="/books/edit/<%= book._id %>" class="btn btn-sm btn-info">Sửa</a>
-                                        <form action="/books/delete/<%= book._id %>?_method=DELETE" class="d-inline"
-                                              method="POST">
-                                            <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            <% }) %>
-                            </tbody>
-                        </table>
-                    </div>
-                <% } %>
-                <% if (view == 'book-create') { %>
-                    <form method="POST" action="/books/new">
-                        <%- include ('../books/_bookForm.ejs') %>
-                    </form>
-                <% } %>
-                <% if (view == 'user-create') { %>
-                    <form method="POST" action="/users/register">
-                        <%- include ('../users/_userForm.ejs') %>
-                    </form>
-                <% } %>
-                <% if (view == 'category-create') { %>
-                    <form method="POST" action="/categories/new">
-                        <%- include ('../categories/_categoriesForm.ejs') %>
-                    </form>
-                <% } %>
-                <% if (view == 'users') { %>
-                        <div>
-                            <a class="btn btn-black" href="/admin?view=user-create"><i class="fas fa-plus"></i> Thêm người dùng
-                                mới</a>
-                        </div>
-                    <div class="container mt-2">
-                        <table class="table table-bordered bg-light table-responsive-sm">
-                            <thead>
-                            <tr>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Chức vụ</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">ID</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <% users.forEach(user=>{ %>
-                                <% if(user.role !== 'admin') { %>
-                                    <tr>
-                                        <td style="text-transform: capitalize;"><%= user.name %> </td>
-                                        <td><%= user.role %> </td>
-                                        <td><%= user.email %> </td>
-                                        <td><%= user._id %> </td>
-                                    </tr>
-                                <% } %>
-                            <% }) %>
-                            </tbody>
-                        </table>
-                    </div>
-                <% } %>
-                <% if (view == 'orders') { %>
-                    <div class="container mt-2">
-                        <table class="table table-bordered bg-light table-responsive-sm">
-                            <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Chi tiết</th>
-                                <th scope="col">Ngày</th>
-                                <th scope="col">Khách hàng</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <% orders.forEach(order=>{ %>
-                                <tr>
-                                    <td style="font-size: 75%;"><%= order._id %> </td>
-                                    <td class="text-danger"><%= order.amount %> ₫</td>
-                                    <td>
-                                        <table class="table table-bordered bg-light table-responsive-sm">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">Tên</th>
-                                                <th scope="col">Giá</th>
-                                                <th scope="col">Số lượng</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <% order.details.forEach(cartItem=>{ %>
-                                                <tr>
-                                                    <td><%= cartItem.book.title %> </td>
-                                                    <td class="text-danger"><%= cartItem.book.price %> ₫</td>
-                                                    <td>
-                                                        <%= cartItem.quantity %>
-                                                    </td>
-                                                </tr>
-                                            <% }) %>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <%= order.createdAt %>
-                                    </td>
-                                    <td>
-                                        <%= order.user.name %>
-                                        <br>
-                                        <span class="text-primary">
-                                            <%= order.user.email %>
-                                        </span>
-
-                                    </td>
-                                </tr>
-                            <% }) %>
-                            </tbody>
-                        </table>
-                    </div>
-                <% } %>
-            </div>
-        </div>
+  <div class="list-page">
+    <div class="main-left">
+      <div class="top-img">
+        <img src="images/navimg.png" alt="Navigation Image" />
+      </div>
+      <nav class="menu">
+        <h3 class="menu-title">Admin menu</h3>
+        <ul>
+          <li>
+            <a class="menu__item" href="/admin?view=books">Manage books</a>
+          </li>
+          <li>
+            <a class="menu__item" href="/admin?view=users">Manage users</a>
+          </li>
+          <li>
+            <a class="menu__item" href="/admin?view=orders">Manage orders</a>
+          </li>
+          <li><a class="menu__item" href="/users/logout">Logout</a></li>
+        </ul>
+      </nav>
     </div>
+    <div class="main-right">
+      <% var title = "Administrative Page"; %> <% if (view == 'books') title =
+      "MANAGE BOOKS" %> <% if (view == 'users') title = "MANAGE USERS" %> <% if
+      (view == 'user-create') title = "CREATE NEW USER" %>
+      <!-- <% if (view == 'orders') title = "MANAGE ORDERS"; %> -->
+      <% if (view == 'book-create') title = "ADD NEW BOOK" %> <% if (view ==
+      'category-create') title = "ADD NEW CATEGORY" %>
+      <h1><%= title %></h1>
+      <div class="list-zone">
+        <% if(view == 'books') { %>
+        <div>
+          <a class="btn btn-black" href="/admin?view=book-create"
+            ><i class="fas fa-plus"></i> Add book
+          </a>
+          <a class="btn btn-black" href="/admin?view=category-create"
+            ><i class="fas fa-plus"></i> Add new category</a
+          >
+        </div>
+        <div class="container mt-2">
+          <table
+            class="table table-bordered bg-light table-responsive-sm"
+            style="min-width: 100%"
+          >
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Book name</th>
+                <th scope="col">Origin</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% books.forEach(book=>{ %>
+              <tr>
+                <td>
+                  <img
+                    src="<%= book.image %>"
+                    alt="Book Cover"
+                    class="img-thumbnail"
+                    style="height: 100px; width: auto"
+                  />
+                </td>
+                <td class="lead text-primary"><%= book.title %></td>
+                <td class="lead text-danger"><%= getCategoryName(book) %></td>
+                <td>
+                  <a
+                    href="/books/edit/<%= book._id %>"
+                    class="btn btn-sm btn-info"
+                    >Edit</a
+                  >
+                  <form
+                    action="/books/delete/<%= book._id %>?_method=DELETE"
+                    class="d-inline"
+                    method="POST"
+                  >
+                    <button type="submit" class="btn btn-sm btn-danger">
+                      Delete
+                    </button>
+                  </form>
+                </td>
+              </tr>
 
-
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+        <% } %> <% if (view == 'book-create') { %>
+        <form method="POST" action="/books/new">
+          <%- include ('../books/_bookForm.ejs') %>
+        </form>
+        <% } %> <% if (view == 'user-create') { %>
+        <form method="POST" action="/users/register">
+          <%- include ('../users/_userForm.ejs') %>
+        </form>
+        <% } %> <% if (view == 'category-create') { %>
+        <form method="POST" action="/categories/new">
+          <%- include ('../categories/_categoriesForm.ejs') %>
+        </form>
+        <% } %> <% if (view == 'users') { %>
+        <div>
+          <a class="btn btn-black" href="/admin?view=user-create"
+            ><i class="fas fa-plus"></i> Add user new</a
+          >
+        </div>
+        <div class="container mt-2">
+          <table class="table table-bordered bg-light table-responsive-sm">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Position</th>
+                <th scope="col">Email</th>
+                <th scope="col">ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(user=>{ %> <% if(user.role !== 'admin') { %>
+              <tr>
+                <td style="text-transform: capitalize"><%= user.name %></td>
+                <td><%= user.role %></td>
+                <td><%= user.email %></td>
+                <td><%= user._id %></td>
+              </tr>
+              <% } %> <% }) %>
+            </tbody>
+          </table>
+        </div>
+        <% } %> <% if (view == 'orders') { %>
+        <div class="container mt-2">
+          <table class="table table-bordered bg-light table-responsive-sm">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Price</th>
+                <th scope="col">Details</th>
+                <th scope="col">Date</th>
+                <th scope="col">Customers</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% orders.forEach(order=>{ %>
+              <tr>
+                <td style="font-size: 75%"><%= order._id %></td>
+                <td class="text-danger"><%= order.amount %> ₫</td>
+                <td>
+                  <table
+                    class="table table-bordered bg-light table-responsive-sm"
+                  >
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% order.details.forEach(cartItem => { %>
+                      <tr>
+                        <% if (cartItem.book) { %>
+                        <td><%= cartItem.book.title %></td>
+                        <td class="text-danger">
+                          <%= cartItem.book.price %> ₫
+                        </td>
+                        <% } else { %>
+                        <td>Book information not available</td>
+                        <td class="text-danger">N/A</td>
+                        <% } %>
+                        <td><%= cartItem.quantity %></td>
+                      </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+                </td>
+                <td><%= order.createdAt %></td>
+                <td>
+                  <%= order.user.name %>
+                  <br />
+                  <span class="text-primary"> <%= order.user.email %> </span>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
 </main>
 
 <%- include ('../partials/_footer.ejs') %>

@@ -1,40 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DH Store</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/js/assets/owl.carousel.min.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DH's Library</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/js/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="/js/assets/owl.theme.default.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-<header>
-    <div class="nav">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="nav">
         <div class="logo">
-            <img class="logo__img" src="/images/logo.png"/>
-            <span class="logo__text">DH's Library</span>
+          <a href="/books"><img class="logo__img" src="/images/logo.png" /></a>
+          <a href="/books"><span class="logo__text">DH's Library</span></a>
         </div>
         <nav class="menu">
-            <ul class="menu__wrapper">
-                <li class="menu__item"><a href="/books">Trang chủ</a></li>
-                <li class="menu__item"><a href="/books/list">Shop</a></li>
-                <li class="menu__item">Ebooks</li>
-                <li class="menu__item">Liên hệ</li>
-            </ul>
+          <ul class="menu__wrapper">
+            <li class="menu__item"><a href="/books">HOME</a></li>
+            <li class="menu__item"><a href="/books/list">BOOKS</a></li>
+            <li class="menu__item"><a href="/privacy/about">ABOUT US</a></li>
+            <li class="menu__item">
+              <a href="/privacy/contact">CONTACT US</a>
+            </li>
+          </ul>
         </nav>
         <div class="cart">
-            <span>
-                <% if(typeof user === 'undefined'){ %>
-                    <a href="/users/login" class="btn btn-sm btn-success">Đăng nhập</a>
-                <% } else{%>
-                    <span class="lead mr-2 capital user-name-home">Xin chào, <a href="/users/dashboard" class="btn btn-sm btn-success d-inline"><%= user.name  %></a> </span>
-                <% } %>
+          <span>
+            <% if(typeof user === 'undefined'){ %>
+            <a href="/users/login" class="btn btn-sm btn-success">Sign in</a>
+            <% } else{%>
+            <span class="lead mr-2 capital user-name-home"
+              >Welcome,
+              <a href="/users/dashboard" class="btn btn-sm btn-success d-inline"
+                ><%= user.name %></a
+              >
             </span>
-            <span class="cart__wrapper">
-                <a href="/users/dashboard?view=cart"><i class="fas fa-shopping-cart"></i></a>
-            </span>
+            <% } %>
+          </span>
+          <span class="cart__wrapper">
+            <a href="/users/dashboard?view=cart"
+              ><i class="fas fa-shopping-cart"></i
+            ></a>
+          </span>
         </div>
-    </div>
+      </div>
+    </header>
+  </body>
+</html>

@@ -1,87 +1,99 @@
-<%- include ('../partials/_header.ejs') %>
-<%- include ('../partials/_msg.ejs')  %>
+<%- include ('../partials/_header.ejs') %> <%- include
+('../partials/_msg.ejs')%>
+
 <main>
-    <div class="list-page">
-        <div class="main-left">
-            <div class="top-img">
-                <img src="../../images/navimg.png" />
-            </div>
-            <nav class="menu">
-                <h3 class="menu-title">TRANG CÁ NHÂN</h3>
-                <ul>
-                    <li><a class="menu__item" href="/users/dashboard?view=cart">Giỏ hàng của bạn</a></li>
-                    <li><a class="menu__item" href="/users/orders">Đơn đặt hàng của bạn</a></li>
-                    <li><a class="menu__item" href="/users/logout">Đăng xuất</a></li>
-                </ul>
-
-            </nav>
-        </div>
-        <div class="main-right">
-            <% var title = "TRANG CÁ NHÂN"; %>
-            <h1><%= title %></h1>
-            <div class="list-zone">
-
-                <div class="container mt-3">
-                    <div class="jumbotron p-3">
-                        <div class="d-flex justify-content-around" style="font-size: 25px; color: darkblue;">
-                            <div class="d-flex justify-content-around" style="font-size: 25px; color: darkblue;">
-                                <span>Đơn đặt hàng của bạn</span>
-
-                            </div>
-                        </div>
-                        <hr class="my-3">
-                        <table class="table table-bordered bg-light table-responsive-sm">
-                            <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Tổng tiền</th>
-                                <th scope="col">Chi tiết</th>
-                                <th scope="col">Ngày</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <% orders.forEach(order=>{ %>
-                                <tr>
-                                    <td><%= order._id  %> </td>
-                                    <td class="text-danger"><%= order.amount  %> VNĐ</td>
-                                    <td>
-                                        <table class="table table-bordered bg-light table-responsive-sm">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">Tiêu đề</th>
-                                                <th scope="col">Giá</th>
-                                                <th scope="col">Số lượng</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <% order.details.forEach(cartItem=>{ %>
-                                                <tr>
-                                                    <td><%= cartItem.book.title  %> </td>
-                                                    <td class="text-danger"><%= cartItem.book.price  %> VNĐ</td>
-                                                    <td>
-                                                        <%= cartItem.quantity %>
-                                                    </td>
-                                                </tr>
-                                            <% }) %>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <%= order.createdAt  %>
-                                    </td>
-                                </tr>
-                            <% }) %>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+  <div class="list-page">
+    <div class="main-left">
+      <div class="top-img">
+        <img src="../../images/navimg.png" />
+      </div>
+      <nav class="menu">
+        <h3 class="menu-title">Go to Dashboard</h3>
+        <ul>
+          <li>
+            <a class="menu__item" href="/users/dashboard?view=cart"
+              >Your cart</a
+            >
+          </li>
+          <li>
+            <a class="menu__item" href="/users/dashboard?view=orders"
+              >Your orders</a
+            >
+          </li>
+          <li><a class="menu__item" href="/users/logout">Logout</a></li>
+        </ul>
+      </nav>
     </div>
-
-
+    <div class="main-right">
+      <% var title = "Go to Dashboard"; %>
+      <h1><%= title %></h1>
+      <div class="list-zone">
+        <div class="container mt-3">
+          <div class="jumbotron p-3">
+            <div
+              class="d-flex justify-content-around"
+              style="font-size: 25px; color: darkblue"
+            >
+              <div
+                class="d-flex justify-content-around"
+                style="font-size: 25px; color: darkblue"
+              >
+                <span>Your order</span>
+              </div>
+            </div>
+            <hr class="my-3" />
+            <table class="table table-bordered bg-light table-responsive-sm">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Total amount</th>
+                  <th scope="col">Details</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% orders.forEach(order=>{ %>
+                <tr>
+                  <td><%= order._id %></td>
+                  <td class="text-danger"><%= order.amount %> VND</td>
+                  <td>
+                    <table
+                      class="table table-bordered bg-light table-responsive-sm"
+                    >
+                      <thead>
+                        <tr>
+                          <th scope="col">Title</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% order.details.forEach(cartItem => { %>
+                        <tr>
+                          <td>
+                            <% if (cartItem.book) { %> <%= cartItem.book.title
+                            %> <% } else { %> N/A <% } %>
+                          </td>
+                          <td class="text-danger">
+                            <% if (cartItem.book) { %> <%= cartItem.book.price
+                            %> VND <% } else { %> N/A <% } %>
+                          </td>
+                          <td><%= cartItem.quantity %></td>
+                        </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td><%= order.createdAt %></td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
 <%- include ('../partials/_footer.ejs') %>
-

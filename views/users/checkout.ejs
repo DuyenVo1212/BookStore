@@ -6,55 +6,57 @@
                 <img src="../../images/navimg.png" />
             </div>
             <nav class="menu">
-                <h3 class="menu-title">TRANG CÁ NHÂN</h3>
+                <h3 class="menu-title">USER</h3>
                 <ul>
-                    <li><a class="menu__item" href="/users/dashboard?view=cart">Giỏ hàng của bạn</a></li>
-                    <li><a class="menu__item" href="/users/dashboard?view=order">Đơn đặt hàng của bạn</a></li>
-                    <li><a class="menu__item" href="/users/logout">Đăng xuất</a></li>
+                    <li><a class="menu__item" href="/users/dashboard?view=cart">Your cart</a></li>
+                    <li><a class="menu__item" href="/users/dashboard?view=order">Your order list</a></li>
+                    <li><a class="menu__item" href="/users/logout">Log out</a></li>
                 </ul>
 
             </nav>
         </div>
         <div class="main-right">
-            <% var title = "TRANG CÁ NHÂN"; %>
+            <% var title = "USER"; %>
             <h1><%= title %></h1>
             <div class="list-zone">
                 <div class="container mt-3">
                     <div class="jumbotron p-3">
                         <div class="d-flex justify-content-around" style="font-size: 25px; color: darkblue;">
-                            <span>Thanh toán đơn đặt hàng</span>
+                            <span>Payment of orders</span>
                         </div>
                         <div class="container mt-2">
                             <table class="table table-bordered bg-light table-responsive-sm">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Ảnh bìa</th>
-                                    <th scope="col">Tiêu đề</th>
-                                    <th scope="col">Giá</th>
-                                    <th scope="col">Số lượng</th>
-                                    <th scope="col">Tổng tiền</th>
+                                    <th scope="col">Cover image</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% user.carts.forEach(cartItem=>{ %>
-                                    <tr>
-                                        <td><img src="<%= cartItem.book.image %>" alt="Book Cover" class="img-thumbnail"
-                                                 style="height: 8rem; width: 8rem;"></td>
-                                        <td><%= cartItem.book.title %> </td>
-                                        <td class="text-danger"><%= cartItem.book.price %> VNĐ/td>
-                                        <td>
-                                            <%= cartItem.quantity %>
-                                        </td>
-                                        <td class="text-danger">
-                                            <%= cartItem.quantity * cartItem.book.price %> VNĐ
-                                        </td>
+                                    <% user.carts.forEach(cartItem => { %>
+                                        <tr>
+                                            <td>
+                                                <img src="<%= cartItem.book.image %>" alt="Book Cover" class="img-thumbnail"
+                                                     style="height: 8rem; width: 8rem;">
+                                            </td>
+                                            <td><%= cartItem.book.title %></td>
+                                            <td class="text-danger"><%= cartItem.book.price %> VNĐ</td>
+                                            <td><%= cartItem.quantity %></td>
+                                            <td class="text-danger">
+                                                <%= cartItem.quantity * cartItem.book.price %> VNĐ
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                    <tr class="lead font-weight-bold text-primary">
+                                        <td colspan="3">Grand Total</td>
+                                        <td colspan="2"><%= total %> VNĐ</td>
                                     </tr>
-                                <% }) %>
-                                <tr class="lead font-weight-bold text-primary">
-                                    <td colspan="3">Grand Total</td>
-                                    <td colspan="2"> <%= total %> VNĐ</td>
-                                </tr>
                                 </tbody>
+                                
+
                             </table>
                         </div>
                         <hr class="my-3">
@@ -65,7 +67,7 @@
                                         class="stripe-button"
                                         data-key="pk_test_51KsBxIAfr6M2lqwvJMk6jCr7oKT74NecS8f4aHL1N00fuHi8vq444So6VzyTSVCQkW5botpIiypOnX6u9i5mtrXV001RWRhRce"
                                         data-name="DH Library"
-                                        data-description="Mua sách đi bạn"
+                                        data-description="Let buy books"
                                         data-amount="<%= total%>"
                                         data-currency="vnd"
                                         data-image="https://media.istockphoto.com/vectors/books-bookshelf-vector-icon-isolated-pile-of-books-stack-of-books-vector-id1292243574?k=20&m=1292243574&s=612x612&w=0&h=s1SwOqoaKZoTzQK8KlFV97pTe1JzWMwHOs9RQSB69SA=">
@@ -77,8 +79,6 @@
             </div>
         </div>
     </div>
-
-
 </main>
 
 <div class="container">
@@ -105,12 +105,12 @@
     </div>
 </div>
 
-<!--    <span class="navbar-brand mb-0 lead">-->
-<!--        <img src="https://cdn3.iconfinder.com/data/icons/book-shop-category-ouline/512/Book_Shop_Category-10-512.png" alt="" style="height: 2.5em; width: 2.5em;" class="img-thumbnail rounded-circle">-->
-<!--        Book Store</span>-->
-<!--    <span>-->
-<!--        <a href="/books" class="btn btn-sm btn-success">Go to Store</a>-->
-<!--        <a href="/users/orders" class="btn btn-sm btn-info">Your Orders</a>-->
+    <span class="navbar-brand mb-0 lead">
+        <img src="https://cdn3.iconfinder.com/data/icons/book-shop-category-ouline/512/Book_Shop_Category-10-512.png" alt="" style="height: 2.5em; width: 2.5em;" class="img-thumbnail rounded-circle">
+        Book Store</span>
+    <span>
+        <a href="/books" class="btn btn-sm btn-success">Go to Store</a>
+        <a href="/users/orders" class="btn btn-sm btn-info">Your Orders</a>
 </nav>
 <div class="container">
     <div class="jumbotron my-2">
@@ -118,7 +118,7 @@
             <h1 class="display-4">Xin chào <strong class="capital"><%= user.name  %> </strong></h1>
             <hr class="my-2">
             <p class="lead">
-                Đây là trang cá nhân của bạn
+                This is your personal page
             </p>
             <h5>
                 <span style="color: rgb(97, 91, 92);">Email:</span> <span><%= user.email  %></span>
@@ -127,7 +127,7 @@
     </div>
     <div class="jumbotron p-3">
         <div class="d-flex justify-content-around" style="font-size: 25px; color: darkblue;">
-            <span>Giỏ hàng của bạn <%= user.carts.length === 0 ? 'đang trống' : '' %></span>
+            <span>Your shopping cart <%= user.carts.length === 0 ? 'empty' : '' %></span>
             <% if(user.carts.length !== 0)  {%>
                 <button type="button" class="lead btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
                     Thanh toán
@@ -138,10 +138,10 @@
             <table class="table table-bordered bg-light table-responsive-sm">
                 <thead>
                 <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col">Tên sản phẩm</th>
-                    <th scope="col">Giá</th>
-                    <th scope="col">Tùy chỉnh</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Custom</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -177,9 +177,9 @@
                                 <table class="table table-bordered bg-light table-responsive-sm">
                                     <thead>
                                     <tr>
-                                        <th scope="col">Tên sản phẩm</th>
-                                        <th scope="col">Giá</th>
-                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -207,8 +207,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-primary">Thanh toán</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Pay</button>
                         </div>
                     </form>
                 </div>
@@ -220,3 +220,7 @@
 
 
 <%- include ('../partials/_footer.ejs') %>
+
+
+
+

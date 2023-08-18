@@ -1,62 +1,73 @@
 <footer>
-    <div class="footer-left">
-        <nav>
-            <h3>Store</h3>
-            <ul class="footer-nav">
-                <li><a href="">Men</a></li>
-                <li><a href="">Women</a></li>
-                <li><a href="">Children</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <h3>About</h3>
-            <ul class="footer-nav">
-                <li><a href="">Men</a></li>
-                <li><a href="">Women</a></li>
-                <li><a href="">Children</a></li>
-            </ul>
-        </nav>
-    </div>
-    <nav class="footer-right">
-        <h3>Subscribe</h3>
-        <span>Tt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</span>
-        <div class="footer-input">
-            <input type="email" placeholder="Nhập email"/>
-            <button>Gửi</button>
+    <div class="container-md">
+    <div class="row mb-5">
+        <div class="col-md-3 mb-5">
+            <img id="footer-logo" src="/images/logo.png" alt="Bookffee-logo">
         </div>
-    </nav>
+        <div class="col-md-3 mb-5">
+            <h2><b>Contact us</b></h2>
+            <ul class="list-unstyled footer-link footer-text">
+                <li><a href="/privacy/about">About us</a></li>
+             
+            </ul>
+        </div>
+        <div class="col-md-3 mb-5">
+            <h2><b>Support</b></h2>
+            <ul class="list-unstyled footer-link footer-text">
+                
+                <<li><a href="/privacy/conditions">Terms &amp; Services</a></li>
+                <li><a href="/privacy/privacy-policy">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 mb-5">
+            <h2><b>Đăng ký</b></h2>
+    <div class="container-md">
+    <div class="row mb-5">
+       
+       <ul class="list-unstyled footer-link d-flex footer-social">
+           <li><a target="_blank" href="https://twitter.com/LucioFex"><i class="fa fa-twitter"></i></a></li>
+               <li><a target="_blank" href="https://www.linkedin.com/in/luciano-esteban/"><i class="fa fa-linkedin"></i></a></li>
+               <li><a target="_blank" href="https://www.youtube.com/channel/UChSADdRmOom53y8UyrC2-6g"><i class="fa fa-youtube"></i></a></li>
+           </ul>
+       <span><p>DH's Library is a website for searching for books, allowing you to see their prices and summaries, as well as being able to filter them by genre, popularity and date...</p></span>
+       <div class="footer-input">
+           <input type="email" placeholder="Nhập email"/>
+           <button>Submit</button>
+       </div>
+   </nav>
 </footer>
+<script src="https://kit.fontawesome.com/e74d02339d.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/js/owl.carousel.min.js"></script>
 <script type="text/javascript">
-    $('.owl-carousel').owlCarousel({
-        loop: true,
-        dots: false,
-        nav: true,
-        autoplay: true,
-        navText: ["<span class='slide--slide-left'><i class='fas fa-chevron-left'></i></span>", "<span class='slide--slide-right'><i class='fas fa-chevron-right'></i></span>"],
-        responsive:{
-            1:{
-                items:1
-            },
-            425:{
-                items:3
-            },
-            1000:{
-                items:5
-            }
-        }
-    });
+   $('.owl-carousel').owlCarousel({
+       loop: true,
+       dots: false,
+       nav: true,
+       autoplay: true,
+       navText: ["<span class='slide--slide-left'><i class='fas fa-chevron-left'></i></span>", "<span class='slide--slide-right'><i class='fas fa-chevron-right'></i></span>"],
+       responsive:{
+           1:{
+               items:1
+           },
+           425:{
+               items:3
+           },
+           1000:{
+               items:5
+           }
+       }
+   });
 
-    var closesIcon = document.querySelectorAll('.xd-message .close-icon');
+   var closesIcon = document.querySelectorAll('.xd-message .close-icon');
 
-    closesIcon.forEach(function(closeIcon) {
-        closeIcon.addEventListener('click', function() {
-            this.parentNode.parentNode.classList.add('hide');
-        });
-    });
+   closesIcon.forEach(function(closeIcon) {
+       closeIcon.addEventListener('click', function() {
+           this.parentNode.parentNode.classList.add('hide');
+       });
+   });
 </script>
 </body>
 </html>

@@ -1,33 +1,33 @@
 <%- include ('../partials/_header.ejs') %>
 <main>
-    <div class="list-page">
-        <div class="main-left">
-            <div class="top-img">
-                <img src="../../images/navimg.png" />
-            </div>
-            <nav class="menu">
-                <h3 class="menu-title">TRANG CÁ NHÂN</h3>
-                <ul>
-                    <li><a class="menu__item" href="/users/dashboard?view=cart">Giỏ hàng của bạn</a></li>
-                    <li><a class="menu__item" href="/users/orders">Đơn đặt hàng của bạn</a></li>
-                    <li><a class="menu__item" href="/users/logout">Đăng xuất</a></li>
-                </ul>
-
-            </nav>
-        </div>
-        <div class="main-right">
-            <% var title = "TRANG CÁ NHÂN"; %>
-            <h1><%= title %></h1>
-            <div class="list-zone">
-                <% if (view == 'cart') {%>
-                    <%- include ('../users/cart.ejs') %>
-                <% }%>
-
-            </div>
-        </div>
+  <div class="list-page">
+    <div class="main-left">
+      <div class="top-img">
+        <img src="../../images/navimg.png" />
+      </div>
+      <nav class="menu">
+        <h3 class="menu-title">USER</h3>
+        <ul>
+          <li>
+            <a class="menu__item" href="/users/dashboard?view=cart"
+              >Your Cart</a
+            >
+          </li>
+          <li>
+            <a class="menu__item" href="/users/orders">Your Orders</a>
+          </li>
+          <li><a class="menu__item" href="/users/logout">Log out</a></li>
+        </ul>
+      </nav>
     </div>
-
-
+    <div class="main-right">
+      <% var title = "USER"; %>
+      <h1><%= title %></h1>
+      <div class="list-zone">
+        <% if (view == 'cart') {%> <%- include ('../users/cart.ejs') %> <% }%>
+      </div>
+    </div>
+  </div>
 </main>
 
-        <%- include ('../partials/_footer.ejs') %>
+<%- include ('../partials/_footer.ejs') %>
