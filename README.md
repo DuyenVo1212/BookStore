@@ -30,8 +30,10 @@
 * <img src="./README_IMG/cart.png">
 * <img src="./README_IMG/stripe.png">
 ---
-### Email Notification
-* <img src="./README_IMG/email1.png">
-* <img src="./README_IMG/email2.png">
+# BookStore
+- Test Stripe Card Details
+- Card Number: 4242 4242 4242 4242
+- Expiry: Any Future Month
+- CVV: Any three Digit Number
 
 
